@@ -10,10 +10,9 @@ const AddCoffee = () => {
     const form = e.target;
     const formData = new FormData(form);
     const coffeeData = Object.fromEntries(formData);
-    console.log(coffeeData);
 
     //send data in DB
-    fetch("http://localhost:3000/coffees", {
+    fetch("https://coffee-store-server-lovat-eight.vercel.app/coffees", {
       method: "POST",
       headers: {
         "Content-type": "Application/json",

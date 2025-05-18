@@ -5,16 +5,19 @@ import AddCoffee from "../pages/AddCoffee";
 import Spinner from "../components/Spinner";
 import CoffeeDetails from "../pages/CoffeeDetails";
 import UpdateCoffee from "../pages/UpdateCoffee";
+import ErrorPage from "../pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
         Component: Home,
-        loader: () => fetch("http://localhost:3000/coffees"),
+        loader: () =>
+          fetch("https://coffee-store-server-lovat-eight.vercel.app/coffees"),
         hydrateFallbackElement: <Spinner />,
       },
       {
@@ -24,14 +27,21 @@ const router = createBrowserRouter([
       {
         path: "coffees/:id",
         Component: CoffeeDetails,
+
         loader: ({params}) =>
-          fetch(`http://localhost:3000/coffees/${params.id}`),
+          fetch(
+            `https://coffee-store-server-lovat-eight.vercel.app/coffees/${params.id}`
+          ),
+        hydrateFallbackElement: <Spinner />,
       },
       {
         path: "updateCoffee/:id",
         Component: UpdateCoffee,
         loader: ({params}) =>
-          fetch(`http://localhost:3000/coffees/${params.id}`),
+          fetch(
+            `https://coffee-store-server-lovat-eight.vercel.app/coffees/${params.id}`
+          ),
+        hydrateFallbackElement: <Spinner />,
       },
     ],
   },

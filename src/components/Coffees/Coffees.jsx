@@ -9,10 +9,9 @@ import Swal from "sweetalert2";
 
 const Coffees = () => {
   const initalCoffees = useLoaderData();
+
   const [coffees, setCoffees] = useState(initalCoffees);
-  console.log(coffees);
   const handleDelete = (id) => {
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -23,9 +22,12 @@ const Coffees = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/coffees/${id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://coffee-store-server-lovat-eight.vercel.app/coffees/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount) {

@@ -2,13 +2,37 @@ import React from "react";
 import {useLoaderData, useNavigate} from "react-router";
 import updateCoffeeBg from "../images/more/11.png";
 import {FaArrowLeftLong} from "react-icons/fa6";
+import Swal from "sweetalert2";
 const UpdateCoffee = () => {
   const coffeeData = useLoaderData();
-  const {photo, suppiler, details, category, name, price, quantity} =
+  const {photo, suppiler, details, category, name, price, quantity, _id} =
     coffeeData || {};
   const navigate = useNavigate();
   const handleUpdate = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const newCoffeeData = Object.fromEntries(formData.entries());
+
+    //update data
+    fetch(`https://coffee-store-server-lovat-eight.vercel.app/coffees/${_id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newCoffeeData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          Swal.fire({
+            title: "Coffee Updated Sunccessfully!",
+            icon: "success",
+            draggable: true,
+            timer: 1500,
+          });
+        }
+      });
   };
   return (
     <div className="p-6 mb-10 relative">
