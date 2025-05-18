@@ -1,8 +1,6 @@
 import React, {useState} from "react";
 import coffeeIcon from "../../images/icons/1.png";
 import coffeeBg from "../../images/more/4.png";
-import {FaEye, FaPen} from "react-icons/fa";
-import {MdDelete} from "react-icons/md";
 import {Link, useLoaderData} from "react-router";
 import CoffeeCard from "./CoffeeCard";
 import Swal from "sweetalert2";
